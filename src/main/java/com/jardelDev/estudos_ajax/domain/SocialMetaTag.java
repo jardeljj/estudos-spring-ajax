@@ -40,4 +40,11 @@ public class SocialMetaTag implements Serializable {
     public void setImage(String image) {
         this.image = image;
     }
+
+	@Override
+	public String toString() {
+		return "SocialMetaTag [name=" + site + ", title=" + title + ", url=" + url + ", image=" + image + "]";
+	}
+    
+    
 }
