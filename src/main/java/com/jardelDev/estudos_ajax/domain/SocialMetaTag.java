@@ -43,7 +43,7 @@ public class SocialMetaTag implements Serializable {
 
 	@Override
 	public String toString() {
-		return "SocialMetaTag [name=" + site + ", title=" + title + ", url=" + url + ", image=" + image + "]";
+		return "SocialMetaTag [site=" + site + ", title=" + title + ", url=" + url + ", image=" + image + "]";
 	}
     
     

@@ -18,17 +18,15 @@ public class EstudosAjaxApplication implements CommandLineRunner{
 	
 	@Autowired
 	SocialMetaTagService service;
-	
+
 	@Override
 	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
-		
-		SocialMetaTag og = service.getOpenGraphByUrl("https://www.pichau.com.br/cadeira-gamer-pichau-omega-s-free-fire-kelly-espuma-moldada-braco-3d-preto-e-branco-pg-ff-kelly");
-		System.out.println(og.toString());
-		
-		SocialMetaTag twitter = service.getTwitterCardByUrl("https://www.pichau.com.br/cadeira-gamer-pichau-omega-s-free-fire-kelly-espuma-moldada-braco-3d-preto-e-branco-pg-ff-kelly");
-		System.out.println(twitter.toString());
-		
+		String url = "https://www.magazinevoce.com.br/magazinepromobitoficial/smartphone-samsung-galaxy-a06-128gb-4gb-ram-azul-escuro-67-cam-dupla-selfie-8mp/p/238657700/te/ga06/";
+
+		System.out.println("🔎 Testando Open Graph diretamente...");
+		SocialMetaTag tag = service.getSocialMetaTagByUrl(url);
+		System.out.println(tag.toString());
 	}
+
 
 }
