@@ -18,6 +18,10 @@ $("#form-add-promo").submit(function(evt){
         method: "POST",
         url: "/promocao/save",
         data: promo,
+        beforeSend: function(){
+            $("#form-add-promo").hide();
+            $("#loader-form").addClass("loader").show();
+        },
         success: function() {
         			$("#form-add-promo").each(function() {
         				this.reset();
@@ -29,6 +33,12 @@ $("#form-add-promo").submit(function(evt){
         error: function(xhr){
             console.log("> error: ", xhr.responseText);
             $("#alert").addClass("alert alert-danger").text("Não foi possivel salvar esta promocao");
+        },
+        complete:function(){
+            $("#loader-form").fadeOut(800, function(){
+                                $("#form-add-promo").fadeIn(250);
+                                $("#form-add-promo").removeClass("loader");
+                            });
         }
     });
 
@@ -71,6 +81,5 @@ $("#linkPromocao").on('change', function() {
                 $("#loader-img").removeClass("loader");
             }
        });
-
     }
 });
