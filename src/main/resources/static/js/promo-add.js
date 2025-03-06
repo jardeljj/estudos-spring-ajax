@@ -32,7 +32,7 @@ $("#form-add-promo").submit(function(evt){
         },
         error: function(xhr){
             console.log("> error: ", xhr.responseText);
-            $("#alert").addClass("alert alert-danger").text("Não foi possivel salvar está promocao");
+            $("#alert").addClass("alert alert-danger").text("Não foi possivel salvar está promoção");
         },
         complete:function(){
             $("#loader-form").fadeOut(800, function(){
