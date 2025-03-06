@@ -17,7 +17,7 @@ public class PromocaoController {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    @ModelAttribute("categorias")
+    @ModelAttribute("categorias ")
     private List<Categoria> getCategorias(){
         return categoriaRepository.findAll();
     }
