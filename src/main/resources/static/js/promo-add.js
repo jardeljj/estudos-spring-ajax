@@ -4,13 +4,13 @@ $("#form-add-promo").submit(function(evt){
     evt.preventDefault();
 
     var promo = {};
-    promo.linkPromocao = $("#LinkPromocao").val();
-    promo.descricao = $("#descricao").val();
-    promo.preco = $("#preco").val();
-    promo.titulo = $("#titulo").val();
-    promo.categoria =  $("#categoria").val();
-    promo.linkImage = $("#linkImagem").attr("src");
-    promo.site = $("#site").text();
+    	promo.linkPromocao = $("#linkPromocao").val();
+    	promo.descricao = $("#descricao").val();
+    	promo.preco = $("#preco").val();
+    	promo.titulo = $("#titulo").val();
+    	promo.categoria = $("#categoria").val();
+    	promo.linkImagem = $("#linkImagem").attr("src");
+    	promo.site = $("#site").text();
 
     console.log('promo > ', promo);
 
