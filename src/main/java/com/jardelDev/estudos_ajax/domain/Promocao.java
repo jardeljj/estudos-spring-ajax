@@ -1,6 +1,8 @@
 package com.jardelDev.estudos_ajax.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 import org.springframework.format.annotation.NumberFormat;
 
@@ -16,9 +18,11 @@ public class Promocao implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Um título é requerido")
     @Column(name = "titulo", nullable = false)
     private String titulo;
 
+    @NotBlank(message = "O link da promoção é requerido")
     @Column(name = "link_promocao", nullable = false)
     private String linkPromocao;
 
@@ -31,6 +35,7 @@ public class Promocao implements Serializable {
     @Column(name = "link_imagem", nullable = false)
     private String linkImagem;
 
+    @NotNull(message = "O preço é requerido")
     @NumberFormat(style = NumberFormat.Style.CURRENCY, pattern = "#,##0.00")
     @Column(name = "preco_promocao", nullable = false)
     private BigDecimal preco;
@@ -41,6 +46,7 @@ public class Promocao implements Serializable {
     @Column(name = "data_cadastro",nullable = false)
     private LocalDateTime dtCadastro;
 
+    @NotNull(message = "Uma categoria é requerida")
     @ManyToOne
     @JoinColumn(name = "categoria_fk")
     private Categoria categoria;
