@@ -18,11 +18,11 @@ public class Promocao implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Um título é requerido")
+    @NotBlank(message = "Um título é obrigatório")
     @Column(name = "titulo", nullable = false)
     private String titulo;
 
-    @NotBlank(message = "O link da promoção é requerido")
+    @NotBlank(message = "O link da promoção é obrigatório")
     @Column(name = "link_promocao", nullable = false)
     private String linkPromocao;
 
@@ -35,7 +35,7 @@ public class Promocao implements Serializable {
     @Column(name = "link_imagem", nullable = false)
     private String linkImagem;
 
-    @NotNull(message = "O preço é requerido")
+    @NotNull(message = "O preço é obrigatório")
     @NumberFormat(style = NumberFormat.Style.CURRENCY, pattern = "#,##0.00")
     @Column(name = "preco_promocao", nullable = false)
     private BigDecimal preco;
@@ -46,7 +46,7 @@ public class Promocao implements Serializable {
     @Column(name = "data_cadastro",nullable = false)
     private LocalDateTime dtCadastro;
 
-    @NotNull(message = "Uma categoria é requerida")
+    @NotNull(message = "Uma categoria é obrigatória")
     @ManyToOne
     @JoinColumn(name = "categoria_fk")
     private Categoria categoria;
