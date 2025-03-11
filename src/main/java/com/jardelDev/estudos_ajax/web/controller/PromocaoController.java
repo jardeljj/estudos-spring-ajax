@@ -16,11 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -38,6 +34,16 @@ public class PromocaoController {
 
     @Autowired
     private PromocaoRepository promocaoRepository;
+    // ============ adicionando likes =====================
+
+    @PostMapping("/like/{id}")
+    public ResponseEntity<?> adicionarLikes(@PathVariable("id") Long id){
+        promocaoRepository.updateSomarLikes(id);
+        int likes = promocaoRepository.findLikesByID(id);
+        return ResponseEntity.ok(likes);
+    }
+
+
     // ============ lista de ofertas =====================
 
     @GetMapping("/list")
