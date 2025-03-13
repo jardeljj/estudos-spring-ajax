@@ -34,7 +34,16 @@ public class PromocaoController {
 
     @Autowired
     private PromocaoRepository promocaoRepository;
-    // ============ adicionando likes =====================
+    // ============ adicionando autocomplete para busca de sites =====================
+
+    @GetMapping("/site")
+    public ResponseEntity<?> autocompleteByTermo(@RequestParam("termo") String termo){
+        List<String> sites = promocaoRepository.findSitesByTermo(termo);
+        return ResponseEntity.ok(sites);
+    }
+
+
+    // ============ adicionando likes ===============================================
 
     @PostMapping("/like/{id}")
     public ResponseEntity<?> adicionarLikes(@PathVariable("id") Long id){
@@ -44,7 +53,7 @@ public class PromocaoController {
     }
 
 
-    // ============ lista de ofertas =====================
+    // ============ lista de ofertas ================================================
 
     @GetMapping("/list")
     public String listarOfertas(ModelMap model){
@@ -62,7 +71,7 @@ public class PromocaoController {
         return "promo-card";
     }
 
-    // ============ adição de ofertas =====================
+    // ============ adição de ofertas ==============================================
 
     @PostMapping("/save")
     public ResponseEntity<?> salvarPromocao(@Valid Promocao promocao, BindingResult result) {
