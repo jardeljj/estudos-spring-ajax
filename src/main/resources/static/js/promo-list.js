@@ -86,7 +86,7 @@ $("#autocomplete-submit").on("click", function(){
                 $(this).empty();
             });
         },
-        success: function(){
+        success: function(response){
             $(".row").fadeIn(250, function(){
                 $(this).append(response);
             });
