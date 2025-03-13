@@ -72,10 +72,16 @@ public class PromocaoController {
     }
 
     @GetMapping("/list/ajax")
-    public String listarCards(@RequestParam(name = "page", defaultValue = "1") int page, ModelMap model) {
+    public String listarCards(@RequestParam(name = "page", defaultValue = "1") int page,
+                              @RequestParam(name = "site", defaultValue = "") String site,
+                              ModelMap model) {
         Sort sort = Sort.by("dtCadastro").descending();
         PageRequest pageRequest = PageRequest.of(page, 8, sort);
-        model.addAttribute("promocoes", promocaoRepository.findAll(pageRequest));
+        if(site.isEmpty()){
+            model.addAttribute("promocoes", promocaoRepository.findAll(pageRequest));
+        }else {
+            model.addAttribute("promocoes", promocaoRepository.findBySite(site,pageRequest));
+        }
         return "promo-card";
     }
 
