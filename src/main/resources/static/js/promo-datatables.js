@@ -21,7 +21,6 @@ $(document).ready(function(){
             {data: 'dtCadastro'},
             {data: 'categoria.titulo'}
         ]
-
     });
 
 });
