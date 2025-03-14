@@ -4,7 +4,9 @@ import com.jardelDev.estudos_ajax.domain.Categoria;
 import com.jardelDev.estudos_ajax.domain.Promocao;
 import com.jardelDev.estudos_ajax.repository.CategoriaRepository;
 import com.jardelDev.estudos_ajax.repository.PromocaoRepository;
+import com.jardelDev.estudos_ajax.service.PromocaoDataTablesService;
 import groovy.util.logging.Log;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +36,20 @@ public class PromocaoController {
 
     @Autowired
     private PromocaoRepository promocaoRepository;
+    // ============ DataTables =====================
+
+    @GetMapping("/tabela")
+    public String showTabela(){
+        return "promo-datatables";
+    }
+
+    @GetMapping("/datatables/server")
+    public ResponseEntity<?> datatables(HttpServletRequest request){
+        Map<String, Object> data = new PromocaoDataTablesService().execute(promocaoRepository, request);
+        return ResponseEntity.ok(data);
+    }
+
+
     // ============ adicionando autocomplete para busca de sites =====================
 
     @GetMapping("/site")

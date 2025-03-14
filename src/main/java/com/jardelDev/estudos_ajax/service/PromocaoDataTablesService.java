@@ -1,7 +1,9 @@
 package com.jardelDev.estudos_ajax.service;
 
+import com.jardelDev.estudos_ajax.domain.Promocao;
 import com.jardelDev.estudos_ajax.repository.PromocaoRepository;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -28,13 +30,20 @@ public class PromocaoDataTablesService {
 
         Pageable pageable = PageRequest.of(current, lenght, direction, column);
 
+        Page<Promocao> page = queryBy(repository, pageable);
+
         Map<String, Object> json = new LinkedHashMap<>();
         json.put("draw", draw);
-        json.put("recordsTotal", 0);
-        json.put("recordsFiltered", 0);
-        json.put("data", null);
+        json.put("recordsTotal", page.getTotalElements());
+        json.put("recordsFiltered", page.getTotalElements());
+        json.put("data", page.getContent());
 
         return json;
+    }
+
+    private Page<Promocao> queryBy(PromocaoRepository repository, Pageable pageable) {
+
+        return repository.findAll(pageable);
     }
 
     private Sort.Direction orderBy(HttpServletRequest request) {

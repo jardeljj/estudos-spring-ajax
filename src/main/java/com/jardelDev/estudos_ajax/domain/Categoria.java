@@ -1,5 +1,6 @@
 package com.jardelDev.estudos_ajax.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -16,6 +17,7 @@ public class Categoria implements Serializable {
     @Column(name = "titulo", nullable = false, unique = true)
     private String titulo;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "categoria")
     private List<Promocao> promocoes;
 
