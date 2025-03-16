@@ -8,11 +8,15 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 public interface PromocaoRepository extends JpaRepository<Promocao, Long> {
+
+    @Query("select p from Promocao p where p.titulo like %:search% "
+    + "or p.site like %:search% "
+    + "or p.categoria.titulo like %:search%")
+    Page<Promocao> findByTituloOrSiteOrCategoria(@Param("search") String search, Pageable pageable);
 
     @Query("select p from Promocao p where p.site like :site")
     Page<Promocao> findBySite(@Param("site") String site, Pageable pageable);
