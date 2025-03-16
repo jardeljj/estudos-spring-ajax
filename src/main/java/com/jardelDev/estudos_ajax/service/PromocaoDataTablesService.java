@@ -24,9 +24,11 @@ public class PromocaoDataTablesService {
         int lenght = Integer.parseInt(request.getParameter("length"));
         int draw = Integer.parseInt(request.getParameter("draw"));
 
+
         int current = currentPage(start, lenght);
         String column = columnName(request);
         Sort.Direction direction = orderBy(request);
+        String search = searchBy(request);
 
         Pageable pageable = PageRequest.of(current, lenght, direction, column);
 
@@ -41,9 +43,13 @@ public class PromocaoDataTablesService {
         return json;
     }
 
+
     private Page<Promocao> queryBy(PromocaoRepository repository, Pageable pageable) {
 
         return repository.findAll(pageable);
+    }
+
+    private String searchBy(HttpServletRequest request) {
     }
 
     private Sort.Direction orderBy(HttpServletRequest request) {
