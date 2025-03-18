@@ -36,6 +36,7 @@ public class PromocaoController {
 
     @Autowired
     private PromocaoRepository promocaoRepository;
+
     // ============ DataTables =====================
 
     @GetMapping("/tabela")
@@ -53,6 +54,12 @@ public class PromocaoController {
     public ResponseEntity<?> excluirPromocao(@PathVariable("id") Long id){
         promocaoRepository.deleteById(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/edit/{id}")
+    public ResponseEntity<?> preEditarPromocao(@PathVariable("id") Long id){
+        Promocao promo = promocaoRepository.findById(id).get();
+        return ResponseEntity.ok(promo);
     }
 
 
