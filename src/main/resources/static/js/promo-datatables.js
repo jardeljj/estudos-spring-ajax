@@ -72,6 +72,11 @@ $(document).ready(function(){
                 method: "GET",
                 url: "/promocao/edit/" + id,
                 beforeSend: function(){
+                    // removendo as mensssagens
+                    $("span").closest('.error-span').remove();
+                    // remover as bordas vermelhas
+                    $(".is-invalid").removeClass("is-invalid");
+                    // abre modal
                     $("#modal-form").modal('show');
                 },
                 success: function(data){
@@ -94,6 +99,7 @@ $(document).ready(function(){
         }
     });
 
+    // submit do formulario para editar
     $("#btn-edit-modal").on('click', function(){
          var promo = {};
             	promo.descricao = $("#edt_descricao").val();
@@ -107,6 +113,12 @@ $(document).ready(function(){
             method: "POST",
             url: "/promocao/edit",
             data: promo,
+            beforeSend: function(){
+                        // removendo as mensssagens
+                        $("span").closest('.error-span').remove();
+                        // remover as bordas vermelhas
+                        $(".is-invalid").removeClass("is-invalid");
+                    },
             success: function(){
                 $("modal-form").modal("hide");
                 table.ajax.reload();
