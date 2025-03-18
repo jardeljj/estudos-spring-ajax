@@ -2,6 +2,7 @@ package com.jardelDev.estudos_ajax.web.controller;
 
 import com.jardelDev.estudos_ajax.domain.Categoria;
 import com.jardelDev.estudos_ajax.domain.Promocao;
+import com.jardelDev.estudos_ajax.dto.PromocaoDTO;
 import com.jardelDev.estudos_ajax.repository.CategoriaRepository;
 import com.jardelDev.estudos_ajax.repository.PromocaoRepository;
 import com.jardelDev.estudos_ajax.service.PromocaoDataTablesService;
@@ -62,6 +63,28 @@ public class PromocaoController {
         return ResponseEntity.ok(promo);
     }
 
+    @PostMapping("/edit")
+    public ResponseEntity<?> editarPromocao(@Valid PromocaoDTO dto, BindingResult result){
+
+        if (result.hasErrors()){
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError error : result.getFieldErrors()){
+                errors.put(error.getField(),error.getDefaultMessage());
+            }
+            return ResponseEntity.unprocessableEntity().body(errors);
+        }
+
+        Promocao promo = promocaoRepository.findById(dto.getId()).get();
+        promo.setCategoria(dto.getCategoria());
+        promo.setDescricao(dto.getDescricao());
+        promo.setLinkImagem(dto.getLinkImagem());
+        promo.setPreco(dto.getPreco());
+        promo.setTitulo(dto.getTitulo());
+
+        promocaoRepository.save(promo);
+
+        return ResponseEntity.ok().build();
+    }
 
     // ============ adicionando autocomplete para busca de sites =====================
 
