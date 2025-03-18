@@ -39,7 +39,7 @@ $(document).ready(function(){
         				text: 'Excluir',
         				attr: {
         					id: 'btn-excluir',
-        					type: 'button'
+        					type: 'button',
         				},
                         enabled: false
         			}
@@ -71,11 +71,27 @@ $(document).ready(function(){
 
     });
 
-    //acao botao excluir
+    //acao botao excluir(abrir modal)
     $("#btn-excluir").on('click', function() {
         if(isSelectedRow()){
             $("#modal-delete").modal('show');
         }
+    });
+
+    // excluir de uma promoção
+    $("#btn-del-modal").on('click', function(){
+        var id = getPromoId();
+        $.ajax({
+            method: "GET",
+            url: "/promocao/delete/" + id,
+            success: function(){
+                $("#modal-delete").modal('hide');
+                table.ajax.reload();
+            },
+            error: function(){
+                alert("Ops... Ocorreu um erro, tente mais tarde.");
+            }
+        });
     });
 
     function getPromoId(){
