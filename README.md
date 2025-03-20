@@ -8,6 +8,8 @@ Este repositório tem como objetivo o estudo e a implementação da estrutura MV
 - 🌱 Spring Framework 3
 - 🎨 Thymeleaf
 - 🔁 Ajax
+- 📶 Datatables
+- ↔️ SSE (Server Sent Event) 
 
 ## ▶️ Como Rodar o Projeto
 1. **📥 Clone o repositório**
